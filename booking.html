@@ -17,7 +17,7 @@
     }
 
     .booking-wrapper {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto 80px;
       background: #ffffff;
       border-radius: 14px;
@@ -25,11 +25,7 @@
       box-shadow: 0 25px 50px rgba(0,0,0,0.25);
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
+    h1 { text-align: center; }
     .subtitle {
       text-align: center;
       color: #555;
@@ -74,7 +70,6 @@
       width: 100%;
       margin-top: 25px;
       padding: 16px;
-      font-size: 15px;
       font-weight: 700;
       border: none;
       border-radius: 6px;
@@ -83,15 +78,7 @@
 
     .whatsapp-btn {
       background: #25d366;
-      color: #ffffff;
-    }
-
-    .paynow-btn {
-      background: #000000;
-      color: #ffffff;
-      text-align: center;
-      text-decoration: none;
-      display: block;
+      color: #fff;
     }
 
     .confirm-box {
@@ -102,73 +89,61 @@
       border-radius: 10px;
       text-align: center;
     }
-
-    .order-summary {
-      margin: 15px 0;
-      font-size: 15px;
-    }
-
-    .paynow-section img {
-      margin-top: 10px;
-      max-width: 200px;
-    }
   </style>
 
   <script>
     const prices = {
-      "PureWax Waterless Wash": 29,
-      "PureWax Microfiber Towel": 12,
-      "PureWax Combo Pack": 39
+      "PureWax Waterless Wash (16oz)": 29,
+      "PureWax Microfiber Cloth (2pcs)": 12,
+      "PureWax Anti-Bacterial Spray (16oz)": 19,
+      "Combo Pack (Wash + Cloth)": 39,
+      "Twin Pack (2x Wash)": 55,
+      "Family Pack (2x Wash + Cloth + Sanitiser)": 79
     };
 
     function updatePrice() {
       const product = document.getElementById("product").value;
       const qty = document.getElementById("quantity").value;
-      const total = prices[product] * qty;
       document.getElementById("totalPrice").innerText =
-        "Total: SGD $" + total;
+        "Total: SGD $" + (prices[product] * qty);
     }
 
     function sendWhatsApp() {
-      const name = document.getElementById("name").value;
-      const phone = document.getElementById("phone").value;
-      const product = document.getElementById("product").value;
-      const qty = document.getElementById("quantity").value;
-      const location = document.getElementById("location").value;
+      const name = nameInput.value;
+      const phone = phoneInput.value;
+      const product = productSelect.value;
+      const qty = quantity.value;
+      const location = locationInput.value;
       const total = prices[product] * qty;
 
       if (!name || !phone) {
-        alert("Please fill in your name and phone number.");
+        alert("Please fill in name and phone number.");
         return;
       }
 
-      const message =
+      const msg =
         "PureWax Order%0A%0A" +
         "Name: " + name + "%0A" +
         "Phone: " + phone + "%0A" +
         "Product: " + product + "%0A" +
         "Quantity: " + qty + "%0A" +
         "Total: SGD $" + total + "%0A" +
-        "Delivery Location: " + location;
+        "Delivery: " + location;
 
-      window.open(
-        "https://wa.me/6590040534?text=" + message,
-        "_blank"
-      );
+      window.open("https://wa.me/6590040534?text=" + msg, "_blank");
 
-      document.getElementById("orderSummary").innerHTML =
-        "<strong>Product:</strong> " + product + "<br>" +
-        "<strong>Quantity:</strong> " + qty + "<br>" +
-        "<strong>Total:</strong> SGD $" + total;
+      orderSummary.innerHTML =
+        "<b>Product:</b> " + product + "<br>" +
+        "<b>Quantity:</b> " + qty + "<br>" +
+        "<b>Total:</b> SGD $" + total;
 
-      document.getElementById("confirmBox").style.display = "block";
+      confirmBox.style.display = "block";
     }
   </script>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
   <div class="logo">PureWax</div>
   <div class="nav-links">
@@ -181,22 +156,24 @@
   </div>
 </div>
 
-<!-- BOOKING PAGE -->
 <div class="booking-wrapper">
   <h1>Order PureWax</h1>
   <p class="subtitle">Premium waterless car care products</p>
 
   <label>Full Name</label>
-  <input id="name" placeholder="Your name">
+  <input id="nameInput">
 
   <label>Phone Number</label>
-  <input id="phone" placeholder="Your phone number">
+  <input id="phoneInput">
 
   <label>Product</label>
-  <select id="product" onchange="updatePrice()">
-    <option>PureWax Waterless Wash</option>
-    <option>PureWax Microfiber Towel</option>
-    <option>PureWax Combo Pack</option>
+  <select id="productSelect" onchange="updatePrice()">
+    <option>PureWax Waterless Wash (16oz)</option>
+    <option>PureWax Microfiber Cloth (2pcs)</option>
+    <option>PureWax Anti-Bacterial Spray (16oz)</option>
+    <option>Combo Pack (Wash + Cloth)</option>
+    <option>Twin Pack (2x Wash)</option>
+    <option>Family Pack (2x Wash + Cloth + Sanitiser)</option>
   </select>
 
   <label>Quantity</label>
@@ -209,30 +186,15 @@
   <div class="price-box" id="totalPrice">Total: SGD $29</div>
 
   <label>Delivery Location</label>
-  <input id="location" placeholder="Address / area">
+  <input id="locationInput">
 
   <button class="action-btn whatsapp-btn" onclick="sendWhatsApp()">
     SEND ORDER TO WHATSAPP
   </button>
 
-  <a href="#" class="action-btn paynow-btn">
-    PAY WITH PAYNOW (AFTER WHATSAPP)
-  </a>
-
   <div class="confirm-box" id="confirmBox">
     <h3>Order Sent ✅</h3>
-    <p>Your order has been sent to WhatsApp.</p>
-
-    <div class="order-summary" id="orderSummary"></div>
-
-    <div class="paynow-section">
-      <h4>Pay with PayNow</h4>
-      <p>
-        Please complete payment after confirming on WhatsApp.<br>
-        Use your name as the payment reference.
-      </p>
-      <img src="paynow-qr.png" alt="PayNow QR Code">
-    </div>
+    <div id="orderSummary"></div>
   </div>
 </div>
 
