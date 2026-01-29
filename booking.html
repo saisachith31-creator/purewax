@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order PureWax</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f4c75, #3282b8);
+      padding-top: 120px;
+    }
+
+    .booking-wrapper {
+      max-width: 720px;
+      margin: 0 auto 80px;
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 50px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #555;
+      margin-bottom: 35px;
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 20px;
+      display: block;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 14px;
+      margin-top: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    .qty-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .qty-row button {
+      padding: 10px 16px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .price-box {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f4c75;
+    }
+
+    .action-btn {
+      width: 100%;
+      margin-top: 25px;
+      padding: 16px;
+      font-size: 15px;
+      font-weight: 700;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .whatsapp-btn {
+      background: #25d366;
+      color: #ffffff;
+    }
+
+    .paynow-btn {
+      background: #000000;
+      color: #ffffff;
+      display: block;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .confirm-box {
+      display: none;
+      margin-top: 30px;
+      padding: 25px;
+      background: #f1f8ff;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .order-summary {
+      margin: 15px 0;
+      font-size: 15px;
+    }
+
+    .paynow-section img {
+      margin-top: 10px;
+      max-width: 200px;
+    }
+  </style>
+
+  <script>
+    const prices = {
+      "PureWax Waterless Wash": 25,
+      "PureWax Microfiber Towel": 10,
+      "PureWax Combo Pack": 30
+    };
+
+    function updatePrice() {
+      const product = document.getElementById("product").value;
+      const qty = document.getElementById("quantity").value;
+      const total = prices[product] * qty;
+      document.getElementById("totalPrice").innerText =
+        "Total: SGD $" + total;
+    }
+
+    function sendWhatsApp() {
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const product = document.getElementById("product").value;
+      const qty = document.getElementById("quantity").value;
+      const location = document.getElementById("location").value;
+      const total = prices[product] * qty;
+
+      if (!name || !phone) {
+        alert("Please fill in your name and phone number.");
+        return;
+      }
+
+      const message =
+        "PureWax Order%0A%0A" +
+        "Name: " + name + "%0A" +
+        "Phone: " + phone + "%0A" +
+        "Product: " + product + "%0A" +
+        "Quantity: " + qty + "%0A" +
+        "Total: SGD $" + total + "%0A" +
+        "Location: " + location;
+
+      window.open(
+        "https://wa.me/6590040534?text=" + message,
+        "_blank"
+      );
+
+      document.getElementById("orderSummary").innerHTML =
+        "<strong>Product:</strong> " + product + "<br>" +
+        "<strong>Quantity:</strong> " + qty + "<br>" +
+        "<strong>Total:</strong> SGD $" + total;
+
+      document.getElementById("confirmBox").style.display = "block";
+    }
+  </script>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">PureWax</div>
+  <div class="nav-links">
+    <a href="index.html">🏠 Home</a>
+    <a href="about.html">About</a>
+    <a href="how-to-use.html">How to Use</a>
+    <a href="guide.html">Guide</a>
+    <a href="booking.html">Booking</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</div>
+
+<!-- BOOKING PAGE -->
+<div class="booking-wrapper">
+  <h1>Order PureWax</h1>
+  <p class="subtitle">Premium waterless car care products</p>
+
+  <label>Full Name</label>
+  <input id="name" placeholder="Your name">
+
+  <label>Phone Number</label>
+  <input id="phone" placeholder="Your phone number">
+
+  <label>Product</label>
+  <select id="product" onchange="updatePrice()">
+    <option>PureWax Waterless Wash</option>
+    <option>PureWax Microfiber Towel</option>
+    <option>PureWax Combo Pack</option>
+  </select>
+
+  <label>Quantity</label>
+  <div class="qty-row">
+    <button onclick="quantity.stepDown(); updatePrice()">−</button>
+    <input type="number" id="quantity" value="1" min="1" onchange="updatePrice()">
+    <button onclick="quantity.stepUp(); updatePrice()">+</button>
+  </div>
+
+  <div class="price-box" id="totalPrice">Total: SGD $25</div>
+
+  <label>Delivery Location</label>
+  <input id="location" placeholder="Address / area">
+
+  <button class="action-btn whatsapp-btn" onclick="sendWhatsApp()">
+    SEND ORDER TO WHATSAPP
+  </button>
+
+  <a href="#" class="action-btn paynow-btn">
+    PAY WITH PAYNOW (AFTER WHATSAPP)
+  </a>
+
+  <div class="confirm-box" id="confirmBox">
+    <h3>Order Confirmed ✅</h3>
+    <p>Your order has been sent to WhatsApp.</p>
+
+    <div class="order-summary" id="orderSummary"></div>
+
+    <div class="paynow-section">
+      <h4>Pay with PayNow</h4>
+      <p>
+        Please complete payment after confirming on WhatsApp.<br>
+        Use your name as the payment reference.
+      </p>
+      <img src="paynow-qr.png" alt="PayNow QR Code">
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
