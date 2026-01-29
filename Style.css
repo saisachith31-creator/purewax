@@ -1,0 +1,313 @@
+/* ===== RESET & BASE ===== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  padding: 18px 60px;
+
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.nav-links {
+  margin: 0 auto;
+}
+
+.nav-links a {
+  margin: 0 22px;
+  text-decoration: none;
+  color: #000000;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.nav-links a:hover {
+  opacity: 0.7;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 90vh;
+  padding: 0 80px;
+
+  background:
+    linear-gradient(to right, rgba(0,0,0,0.95), rgba(0,0,0,0.6)),
+    url("bmw-headlights.jpg");
+
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+
+  color: #ffffff;
+}
+
+/* ===== HERO LEFT ===== */
+.hero-left {
+  max-width: 45%;
+}
+
+.hero-logo {
+  margin-bottom: 25px;
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  animation: ssGlow 4s ease-in-out infinite;
+}
+
+.hero-left h1 {
+  font-size: 56px;
+  margin: 0 0 20px;
+}
+
+.hero-left p {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #dddddd;
+  max-width: 520px;
+}
+
+/* ===== HERO RIGHT ===== */
+.hero-right {
+  max-width: 45%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-right img {
+  width: 500px;
+  max-width: 100%;
+  height: auto;
+
+  filter:
+    brightness(1.2)
+    contrast(1.25)
+    drop-shadow(0 0 25px rgba(255, 220, 120, 0.6))
+    drop-shadow(0 0 50px rgba(255, 200, 80, 0.4));
+}
+
+/* ===== SS LOGO GLOW ===== */
+@keyframes ssGlow {
+  0% {
+    text-shadow:
+      0 0 6px rgba(255,255,255,0.4),
+      0 0 14px rgba(255,255,255,0.25),
+      0 0 24px rgba(255,255,255,0.15);
+  }
+  50% {
+    text-shadow:
+      0 0 14px rgba(255,255,255,0.9),
+      0 0 30px rgba(255,255,255,0.6),
+      0 0 50px rgba(255,255,255,0.35);
+  }
+  100% {
+    text-shadow:
+      0 0 6px rgba(255,255,255,0.4),
+      0 0 14px rgba(255,255,255,0.25),
+      0 0 24px rgba(255,255,255,0.15);
+  }
+}
+
+/* ===== BOOKING PAGE ===== */
+.booking-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a1a2f, #0f3a66);
+  padding: 160px 20px 80px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.booking-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 600px;
+  padding: 50px;
+  border-radius: 14px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+  text-align: center;
+}
+
+.booking-card h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.booking-card .subtitle {
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.booking-form textarea {
+  min-height: 100px;
+}
+
+.booking-form button {
+  margin-top: 10px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.booking-form button:hover {
+  background: #111;
+}
+
+/* ===== CONFIRMATION ===== */
+.confirm-box {
+  display: none;
+  margin-top: 30px;
+  padding: 25px;
+  background: #f1f8ff;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.paynow-section img {
+  max-width: 200px;
+  margin-top: 10px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 80px 30px;
+  }
+
+  .hero-left,
+  .hero-right {
+    max-width: 100%;
+  }
+
+  .hero-right {
+    margin-top: 40px;
+    justify-content: center;
+  }
+}
+/* ===== HOW TO USE PAGE ===== */
+
+.howto-page {
+  min-height: 100vh;
+  background: #f4f7fb;
+  padding: 160px 20px 80px;
+}
+
+.howto-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 60px 50px;
+  border-radius: 14px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+}
+
+.howto-container h1 {
+  text-align: center;
+  font-size: 44px;
+  margin-bottom: 15px;
+}
+
+.howto-intro {
+  text-align: center;
+  font-size: 17px;
+  color: #555;
+  margin-bottom: 45px;
+  line-height: 1.6;
+}
+
+/* STEP BOXES */
+.howto-step {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 30px 35px;
+  margin-bottom: 25px;
+  border-left: 6px solid #0f4c75;
+}
+
+.step-number {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f4c75;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.howto-step h3 {
+  font-size: 22px;
+  margin: 8px 0 10px;
+}
+
+.howto-step p {
+  font-size: 16px;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+  .howto-container {
+    padding: 40px 25px;
+  }
+
+  .howto-container h1 {
+    font-size: 34px;
+  }
+}
+.logo-box {
+  width: 42px;
+  height: 42px;
+  background: #000;
+  color: #fff;
+  font-weight: 800;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  letter-spacing: 1px;
+}
