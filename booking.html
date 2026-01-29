@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Order PureWax</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="favicon.png">
 
@@ -40,7 +42,7 @@
       display: block;
     }
 
-    input, select, textarea {
+    input, select {
       width: 100%;
       padding: 14px;
       margin-top: 8px;
@@ -63,7 +65,7 @@
 
     .price-box {
       margin-top: 20px;
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 700;
       color: #0f4c75;
     }
@@ -87,9 +89,9 @@
     .paynow-btn {
       background: #000000;
       color: #ffffff;
-      display: block;
       text-align: center;
       text-decoration: none;
+      display: block;
     }
 
     .confirm-box {
@@ -114,9 +116,9 @@
 
   <script>
     const prices = {
-      "PureWax Waterless Wash": 25,
-      "PureWax Microfiber Towel": 10,
-      "PureWax Combo Pack": 30
+      "PureWax Waterless Wash": 29,
+      "PureWax Microfiber Towel": 12,
+      "PureWax Combo Pack": 39
     };
 
     function updatePrice() {
@@ -147,7 +149,7 @@
         "Product: " + product + "%0A" +
         "Quantity: " + qty + "%0A" +
         "Total: SGD $" + total + "%0A" +
-        "Location: " + location;
+        "Delivery Location: " + location;
 
       window.open(
         "https://wa.me/6590040534?text=" + message,
@@ -204,7 +206,7 @@
     <button onclick="quantity.stepUp(); updatePrice()">+</button>
   </div>
 
-  <div class="price-box" id="totalPrice">Total: SGD $25</div>
+  <div class="price-box" id="totalPrice">Total: SGD $29</div>
 
   <label>Delivery Location</label>
   <input id="location" placeholder="Address / area">
@@ -218,7 +220,7 @@
   </a>
 
   <div class="confirm-box" id="confirmBox">
-    <h3>Order Confirmed ✅</h3>
+    <h3>Order Sent ✅</h3>
     <p>Your order has been sent to WhatsApp.</p>
 
     <div class="order-summary" id="orderSummary"></div>
