@@ -25,7 +25,11 @@
       box-shadow: 0 25px 50px rgba(0,0,0,0.25);
     }
 
-    h1 { text-align: center; }
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
     .subtitle {
       text-align: center;
       color: #555;
@@ -78,7 +82,7 @@
 
     .whatsapp-btn {
       background: #25d366;
-      color: #fff;
+      color: #ffffff;
     }
 
     .confirm-box {
@@ -104,46 +108,52 @@
     function updatePrice() {
       const product = document.getElementById("product").value;
       const qty = document.getElementById("quantity").value;
+      const total = prices[product] * qty;
+
       document.getElementById("totalPrice").innerText =
-        "Total: SGD $" + (prices[product] * qty);
+        "Total: SGD $" + total;
     }
 
     function sendWhatsApp() {
-      const name = nameInput.value;
-      const phone = phoneInput.value;
-      const product = productSelect.value;
-      const qty = quantity.value;
-      const location = locationInput.value;
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const product = document.getElementById("product").value;
+      const qty = document.getElementById("quantity").value;
+      const location = document.getElementById("location").value;
       const total = prices[product] * qty;
 
       if (!name || !phone) {
-        alert("Please fill in name and phone number.");
+        alert("Please fill in your name and phone number.");
         return;
       }
 
-      const msg =
+      const message =
         "PureWax Order%0A%0A" +
         "Name: " + name + "%0A" +
         "Phone: " + phone + "%0A" +
         "Product: " + product + "%0A" +
         "Quantity: " + qty + "%0A" +
         "Total: SGD $" + total + "%0A" +
-        "Delivery: " + location;
+        "Delivery Location: " + location;
 
-      window.open("https://wa.me/6590040534?text=" + msg, "_blank");
+      window.open(
+        "https://wa.me/6590040534?text=" + message,
+        "_blank"
+      );
 
-      orderSummary.innerHTML =
-        "<b>Product:</b> " + product + "<br>" +
-        "<b>Quantity:</b> " + qty + "<br>" +
-        "<b>Total:</b> SGD $" + total;
+      document.getElementById("orderSummary").innerHTML =
+        "<strong>Product:</strong> " + product + "<br>" +
+        "<strong>Quantity:</strong> " + qty + "<br>" +
+        "<strong>Total:</strong> SGD $" + total;
 
-      confirmBox.style.display = "block";
+      document.getElementById("confirmBox").style.display = "block";
     }
   </script>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <div class="navbar">
   <div class="logo">PureWax</div>
   <div class="nav-links">
@@ -156,18 +166,19 @@
   </div>
 </div>
 
+<!-- BOOKING PAGE -->
 <div class="booking-wrapper">
   <h1>Order PureWax</h1>
   <p class="subtitle">Premium waterless car care products</p>
 
   <label>Full Name</label>
-  <input id="nameInput">
+  <input id="name" placeholder="Your name">
 
   <label>Phone Number</label>
-  <input id="phoneInput">
+  <input id="phone" placeholder="Your phone number">
 
   <label>Product</label>
-  <select id="productSelect" onchange="updatePrice()">
+  <select id="product" onchange="updatePrice()">
     <option>PureWax Waterless Wash (16oz)</option>
     <option>PureWax Microfiber Cloth (2pcs)</option>
     <option>PureWax Anti-Bacterial Spray (16oz)</option>
@@ -178,15 +189,15 @@
 
   <label>Quantity</label>
   <div class="qty-row">
-    <button onclick="quantity.stepDown(); updatePrice()">−</button>
+    <button onclick="document.getElementById('quantity').stepDown(); updatePrice()">−</button>
     <input type="number" id="quantity" value="1" min="1" onchange="updatePrice()">
-    <button onclick="quantity.stepUp(); updatePrice()">+</button>
+    <button onclick="document.getElementById('quantity').stepUp(); updatePrice()">+</button>
   </div>
 
   <div class="price-box" id="totalPrice">Total: SGD $29</div>
 
   <label>Delivery Location</label>
-  <input id="locationInput">
+  <input id="location" placeholder="Address / area">
 
   <button class="action-btn whatsapp-btn" onclick="sendWhatsApp()">
     SEND ORDER TO WHATSAPP
@@ -194,6 +205,7 @@
 
   <div class="confirm-box" id="confirmBox">
     <h3>Order Sent ✅</h3>
+    <p>Your order has been sent to WhatsApp.</p>
     <div id="orderSummary"></div>
   </div>
 </div>
